@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Criando Component 1`] = `
+<View
+  accessible={true}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "column",
+      "opacity": 1,
+    }
+  }
+>
+  <View>
+    <Image
+      style={
+        Array [
+          Object {
+            "height": 60,
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 10,
+            "width": 60,
+          },
+        ]
+      }
+    />
+  </View>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+        },
+      ]
+    }
+  />
+</View>
+`;

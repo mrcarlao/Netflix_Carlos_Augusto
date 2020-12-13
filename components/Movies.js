@@ -1,10 +1,13 @@
-import React from 'react';
-import {Dimensions} from 'react-native';
+import React, { useState } from 'react';
+import { Dimensions, TouchableWithoutFeedback } from 'react-native';
 
 import styled from 'styled-components/native';
+import { useSpring, animated } from 'react-spring'
+
+
 
 const Container = styled.View`
-  padding: 20px 0;
+  padding:  0px;
 `;
 
 const Label = styled.Text`
@@ -21,8 +24,12 @@ const MoviePoster = styled.Image`
   height: 150px;
 `;
 
+const AnimatedMoviePoster = animated(MoviePoster);
+
 const MovieCard = styled.View`
-  padding-right: 9px;
+  padding: 10px;
+  padding-right: 10px;
+  padding-left: 0px;
 `;
 
 /**
@@ -34,20 +41,44 @@ const MovieCard = styled.View`
  * O item 2 deve desaparecer em 2 segundos....
  */
 
-const Movies = ({label, item}) => {
+
+const Movies = ({ label, data }) => {
+  const [pressing, setPressedIn] = useState({ pressed: false });
+
+  const translate = useSpring({
+    to: {
+      scale: 1.1,
+    },
+    from: {
+      scale: 1,
+    },
+  });
+
   return (
     <Container>
       <Label>{label}</Label>
       <MovieScroll horizontal>
-        {item.map((movie, item) => {
+        {data.map((movie, index) => {
           return (
-            <MovieCard key={String(item)}>
-              <MoviePoster resizeMode="cover" source={movie} />
+            <MovieCard key={String(index)}>
+              <TouchableWithoutFeedback
+                onPressOut={() => {
+                  setPressedIn({ pressed: false });
+                }}
+                onPressIn={() => {
+                  setPressedIn({ pressed: true, index: index });
+                }}>
+                <AnimatedMoviePoster
+                  style={
+                    index === pressing.index ? { transform: [translate] } : null
+                  }
+                  resizeMode="cover" source={{ uri: movie.Poster }} />
+              </TouchableWithoutFeedback>
             </MovieCard>
           );
         })}
       </MovieScroll>
-    </Container>
+    </Container >
   );
 };
 
